@@ -142,7 +142,7 @@ APPS = [
         "slug": "getup",
         "name": "GetUp Jump Higher",
         "subtitle": "Plyometrics for a higher vertical",
-        "accent": "#FF7043",
+        "accent": "#3478F6",
         "store": "https://apps.apple.com/us/app/getup-jump-higher/id895973682",
         "shots": 4,
         "summary": "A plyometric program to build your vertical jump. Seven exercises build endurance first, "
