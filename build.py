@@ -187,7 +187,8 @@ def page(title: str, body: str, depth: int, description: str = "", accent: str =
 <title>{escape(full_title)}</title>
 <meta name="description" content="{escape(description or TAGLINE)}">
 <link rel="stylesheet" href="{up}assets/css/site.css">
-<link rel="icon" href="{up}assets/img/apps/topside/icon.png">
+<link rel="icon" type="image/png" href="{up}assets/img/favicon.png">
+<link rel="apple-touch-icon" href="{up}assets/img/apple-touch-icon.png">
 </head>
 <body style="--accent: {accent}">
 <header class="top">
