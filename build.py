@@ -22,7 +22,7 @@ GITHUB = "https://github.com/crizzwald"
 # Shown on every app/support/privacy page. Leave empty to point people at LinkedIn instead.
 CONTACT_EMAIL = ""
 # Optional: drop a square photo at assets/img/me.jpg and set this to True.
-HAS_PHOTO = False
+HAS_PHOTO = True
 POLICY_DATE = "November 20, 2026"
 
 APPS = [
