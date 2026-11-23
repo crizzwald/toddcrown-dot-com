@@ -6,7 +6,8 @@ Pages written:
   /index.html                      app list
   /about/index.html                about + LinkedIn
   /apps/<slug>/index.html          app page (also works as the App Store "Support URL")
-  /apps/<slug>/privacy/index.html  privacy policy (App Store "Privacy Policy URL")
+  /apps/<slug>/privacy/index.html  privacy policy (App Store "Privacy Policy URL"),
+                                   skipped when the app sets "privacy_url" to an external policy
   /404.html
 """
 from datetime import date
@@ -34,7 +35,7 @@ APPS = [
         "store": "https://apps.apple.com/us/app/tacklerow/id6773102741",
         "website": "https://tacklerow.com",
         "contact_email": "support@tacklerow.com",
-        "policy_date": "November 22, 2026",
+        "privacy_url": "https://tacklerow.com/privacy",  # uses its own policy; no page generated here
         "shots": 6,
         "summary": "A US marketplace for handmade fishing tackle. Every bait is hand-poured, painted, tied, or "
                    "built by a real maker, and you buy it straight from them.",
@@ -48,36 +49,6 @@ APPS = [
             ("Sell your baits", "Open a storefront, list your baits, ship with tracking, and get paid to your "
                                 "bank through secure payouts."),
         ],
-        "privacy": [
-            ("The short version", [
-                "Tacklerow is a marketplace, so it needs an account and keeps what's required to run orders, "
-                "messages, and payouts. It doesn't sell your personal information or build advertising "
-                "profiles. The full policy is at tacklerow.com/privacy.",
-            ]),
-            ("What's collected", [
-                "Your email, password, and basic profile details such as a display name. If you sell, the shop "
-                "and listings you publish. Orders you buy or sell, including the shipping address. Messages you "
-                "send to other buyers and sellers. Standard log and device information used to keep the "
-                "service working and secure.",
-            ]),
-            ("Payments", [
-                "Card details go straight to Stripe and are never seen or stored by Tacklerow. Only a record "
-                "that an order was paid and a reference token from Stripe are kept. Seller payouts are also "
-                "handled by Stripe.",
-            ]),
-            ("Who processes your data", [
-                "Supabase (database, sign-in, and photo storage), Stripe (payments and payouts), Resend (order "
-                "and account email), and Vercel (website hosting). Each handles only the part of the job it "
-                "needs.",
-            ]),
-            ("Keeping and deleting your data", [
-                "Your information is kept while your account is open. You can view and edit most of it in the "
-                "app, and you can email support@tacklerow.com for a copy or to delete your account. Order and "
-                "payment records are kept longer because tax, refund, and dispute rules require it.",
-            ]),
-        ],
-        "children": "Tacklerow is for adults. You must be at least 18 to use it, and it doesn't knowingly "
-                    "collect information from anyone under 18.",
     },
     {
         "slug": "topside",
@@ -261,6 +232,11 @@ def page(title: str, body: str, depth: int, description: str = "", accent: str =
 """
 
 
+def privacy_href(app: dict, prefix: str) -> str:
+    """External policy if the app has one, otherwise the generated page under prefix."""
+    return app.get("privacy_url") or f"{prefix}privacy/index.html"
+
+
 def store_button(app: dict, depth: int) -> str:
     if app.get("store"):
         return f'<a class="button" href="{app["store"]}">View on the App Store</a>'
@@ -285,7 +261,7 @@ def build_index():
       <h3>{escape(a['name'])}</h3>
       <p class="sub">{escape(a['subtitle'])}</p>
       <p>{escape(a['summary'])}</p>
-      <p class="links"><a href="apps/{a['slug']}/index.html">Details</a> · <a href="apps/{a['slug']}/privacy/index.html">Privacy</a>{' · <a href="' + a['store'] + '">App Store</a>' if a.get('store') else ' · <span class="muted">' + escape(a.get('status', 'Coming soon')) + '</span>'}</p>
+      <p class="links"><a href="apps/{a['slug']}/index.html">Details</a> · <a href="{privacy_href(a, f"apps/{a['slug']}/")}">Privacy</a>{' · <a href="' + a['store'] + '">App Store</a>' if a.get('store') else ' · <span class="muted">' + escape(a.get('status', 'Coming soon')) + '</span>'}</p>
     </div>
   </article>""")
     body = f"""
@@ -322,7 +298,7 @@ def build_app(a: dict):
   <ul class="features">{feats}</ul>
   <h2 id="support">Support</h2>
   <p>Questions, bugs, or ideas? Reach me {contact_html(a)}. Include your device and iOS version if something's broken.</p>
-  <p>{website}<a href="privacy/index.html">Privacy policy</a></p>
+  <p>{website}<a href="{privacy_href(a, "")}">Privacy policy</a></p>
   {note}
 </section>"""
     write(f"apps/{a['slug']}/index.html", page(a["name"], body, 2, a["summary"], a["accent"]))
@@ -335,10 +311,10 @@ def build_privacy(a: dict):
 <section class="prose policy">
   <p class="crumb"><a href="../index.html">{escape(a['name'])}</a></p>
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated {a.get('policy_date', POLICY_DATE)}</p>
+  <p class="muted">Last updated {POLICY_DATE}</p>
   {sections}
   <h2>Children</h2>
-  <p>{escape(a['children']) if a.get('children') else "The app doesn't knowingly collect any information from anyone, including children under 13."}</p>
+  <p>The app doesn't knowingly collect any information from anyone, including children under 13.</p>
   <h2>Changes</h2>
   <p>If this policy changes, the updated version will be posted on this page with a new date.</p>
   <h2>Contact</h2>
@@ -377,6 +353,7 @@ if __name__ == "__main__":
     build_index()
     for app in APPS:
         build_app(app)
-        build_privacy(app)
+        if not app.get("privacy_url"):
+            build_privacy(app)
     build_about()
     build_404()

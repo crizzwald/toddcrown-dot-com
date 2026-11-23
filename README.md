@@ -15,13 +15,14 @@ git commit -am "Update site" && git push
 
 - Add an app: add an entry to `APPS`, put `icon.png` and `shot-1.jpg`… in `assets/img/apps/<slug>/`.
 - Contact email: set `CONTACT_EMAIL` (otherwise pages point to LinkedIn). An app can override it with `contact_email`.
+- External privacy policy: set `privacy_url` on an app; links point there and no privacy page is generated.
 - Photo: add `assets/img/me.jpg` (square) and set `HAS_PHOTO = True`.
 
 ## URLs for App Store Connect
 
 | App | Support / Marketing URL | Privacy Policy URL |
 |---|---|---|
-| Tacklerow | `/apps/tacklerow/` | `/apps/tacklerow/privacy/` |
+| Tacklerow | `/apps/tacklerow/` | `https://tacklerow.com/privacy` (external) |
 | Topside | `/apps/topside/` | `/apps/topside/privacy/` |
 | Infinite Spartan Stats | `/apps/infinite-spartan-stats/` | `/apps/infinite-spartan-stats/privacy/` |
 | Beach Time | `/apps/beach-time/` | `/apps/beach-time/privacy/` |
