@@ -10,6 +10,7 @@ Pages written:
                                    skipped when the app sets "privacy_url" to an external policy
   /404.html
 """
+import re
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -243,7 +244,12 @@ def store_button(app: dict, depth: int) -> str:
     return f'<span class="button disabled">{escape(app.get("status", "Coming soon"))}</span>'
 
 
+# External links (http/https) open in a new tab; internal and mailto links don't.
+EXTERNAL_LINK = re.compile(r'<a ((?:(?!>)[^>])*?href="https?://[^"]*")')
+
+
 def write(path: str, html: str):
+    html = EXTERNAL_LINK.sub(r'<a \1 target="_blank" rel="noopener"', html)
     out = ROOT / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)
