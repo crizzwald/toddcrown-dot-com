@@ -27,6 +27,59 @@ POLICY_DATE = "November 20, 2026"
 
 APPS = [
     {
+        "slug": "tacklerow",
+        "name": "Tacklerow",
+        "subtitle": "Handmade fishing lures from US makers",
+        "accent": "#7FA7C9",
+        "store": "https://apps.apple.com/us/app/tacklerow/id6773102741",
+        "website": "https://tacklerow.com",
+        "contact_email": "support@tacklerow.com",
+        "policy_date": "November 22, 2026",
+        "shots": 6,
+        "summary": "A US marketplace for handmade fishing tackle. Every bait is hand-poured, painted, tied, or "
+                   "built by a real maker, and you buy it straight from them.",
+        "features": [
+            ("Baits for your fish", "Every listing is tagged by species. Browse and search soft plastics, "
+                                    "crankbaits, jigs, spinnerbaits, and flies."),
+            ("Meet the maker", "Real photos of every bait, the person who made it, and their full shop. "
+                               "Message a maker about colors, sizes, or a custom order."),
+            ("Buy with confidence", "Secure checkout through Stripe, with tracking from paid to shipped to "
+                                    "delivered. Fill one cart from several makers."),
+            ("Sell your baits", "Open a storefront, list your baits, ship with tracking, and get paid to your "
+                                "bank through secure payouts."),
+        ],
+        "privacy": [
+            ("The short version", [
+                "Tacklerow is a marketplace, so it needs an account and keeps what's required to run orders, "
+                "messages, and payouts. It doesn't sell your personal information or build advertising "
+                "profiles. The full policy is at tacklerow.com/privacy.",
+            ]),
+            ("What's collected", [
+                "Your email, password, and basic profile details such as a display name. If you sell, the shop "
+                "and listings you publish. Orders you buy or sell, including the shipping address. Messages you "
+                "send to other buyers and sellers. Standard log and device information used to keep the "
+                "service working and secure.",
+            ]),
+            ("Payments", [
+                "Card details go straight to Stripe and are never seen or stored by Tacklerow. Only a record "
+                "that an order was paid and a reference token from Stripe are kept. Seller payouts are also "
+                "handled by Stripe.",
+            ]),
+            ("Who processes your data", [
+                "Supabase (database, sign-in, and photo storage), Stripe (payments and payouts), Resend (order "
+                "and account email), and Vercel (website hosting). Each handles only the part of the job it "
+                "needs.",
+            ]),
+            ("Keeping and deleting your data", [
+                "Your information is kept while your account is open. You can view and edit most of it in the "
+                "app, and you can email support@tacklerow.com for a copy or to delete your account. Order and "
+                "payment records are kept longer because tax, refund, and dispute rules require it.",
+            ]),
+        ],
+        "children": "Tacklerow is for adults. You must be at least 18 to use it, and it doesn't knowingly "
+                    "collect information from anyone under 18.",
+    },
+    {
         "slug": "topside",
         "name": "Topside",
         "subtitle": "ARC Raiders map conditions & alerts",
@@ -170,10 +223,11 @@ APPS = [
 
 # ---------------------------------------------------------------------------------------------
 
-def contact_html() -> str:
-    if CONTACT_EMAIL:
-        return f'<a href="mailto:{escape(CONTACT_EMAIL)}">{escape(CONTACT_EMAIL)}</a>'
-    return f'<a href="{LINKEDIN}">LinkedIn</a>'
+def contact_html(app=None) -> str:
+    email = (app or {}).get("contact_email") or CONTACT_EMAIL
+    if email:
+        return f'at <a href="mailto:{escape(email)}">{escape(email)}</a>'
+    return f'on <a href="{LINKEDIN}">LinkedIn</a>'
 
 
 def page(title: str, body: str, depth: int, description: str = "", accent: str = "#F1AA1C") -> str:
@@ -250,6 +304,8 @@ def build_app(a: dict):
         for i in range(1, a["shots"] + 1))
     feats = "".join(f"<li><strong>{escape(t)}</strong> {escape(d)}</li>" for t, d in a["features"])
     note = f'<p class="fine">{escape(a["note"])}</p>' if a.get("note") else ""
+    website = (f'<a href="{a["website"]}">{escape(a["website"].split("//")[-1])}</a> · '
+               if a.get("website") else "")
     body = f"""
 <section class="app-hero">
   <img class="icon big" src="../../assets/img/apps/{a['slug']}/icon.png" alt="" width="128" height="128">
@@ -265,8 +321,8 @@ def build_app(a: dict):
   <h2>Features</h2>
   <ul class="features">{feats}</ul>
   <h2 id="support">Support</h2>
-  <p>Questions, bugs, or ideas? Reach me on {contact_html()}. Include your device and iOS version if something's broken.</p>
-  <p><a href="privacy/index.html">Privacy policy</a></p>
+  <p>Questions, bugs, or ideas? Reach me {contact_html(a)}. Include your device and iOS version if something's broken.</p>
+  <p>{website}<a href="privacy/index.html">Privacy policy</a></p>
   {note}
 </section>"""
     write(f"apps/{a['slug']}/index.html", page(a["name"], body, 2, a["summary"], a["accent"]))
@@ -279,14 +335,14 @@ def build_privacy(a: dict):
 <section class="prose policy">
   <p class="crumb"><a href="../index.html">{escape(a['name'])}</a></p>
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated {POLICY_DATE}</p>
+  <p class="muted">Last updated {a.get('policy_date', POLICY_DATE)}</p>
   {sections}
   <h2>Children</h2>
-  <p>The app doesn't knowingly collect any information from anyone, including children under 13.</p>
+  <p>{escape(a['children']) if a.get('children') else "The app doesn't knowingly collect any information from anyone, including children under 13."}</p>
   <h2>Changes</h2>
   <p>If this policy changes, the updated version will be posted on this page with a new date.</p>
   <h2>Contact</h2>
-  <p>Questions about this policy? Reach me on {contact_html()}.</p>
+  <p>Questions about this policy? Reach me {contact_html(a)}.</p>
 </section>"""
     write(f"apps/{a['slug']}/privacy/index.html",
           page(f"{a['name']} Privacy Policy", body, 3, f"Privacy policy for {a['name']}.", a["accent"]))
