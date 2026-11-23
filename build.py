@@ -134,32 +134,54 @@ APPS = [
     {
         "slug": "beach-time",
         "name": "Beach Time",
+        "policy_date": "November 23, 2026",
         "subtitle": "Tides for your next beach day",
-        "accent": "#5ED6C8",
+        "accent": "#FF8A6B",
         "store": "https://apps.apple.com/us/app/beach-time/id1469329051",
-        "shots": 3,
-        "summary": "The exact tide information you need to make the most of your time on the beach. Low tide "
-                   "means more beach, fewer crowds, and a better day.",
+        "shots": 6,
+        "summary": "Know the tide before you go. Live tides, the week ahead, and sunrise to sunset for every "
+                   "NOAA tide station in the U.S.",
         "features": [
-            ("Nearby stations", "Find tide stations near you as soon as you arrive."),
-            ("Favorites", "Save the beaches you visit and see their latest tides at a glance."),
-            ("Simple search", "Slide to a location and browse nearby stations."),
+            ("Your beaches, at a glance", "Favorite and nearby beaches, each with its live tide."),
+            ("Know when the tide turns", "Live height, rising or falling, and the whole day's tide curve."),
+            ("Plan the perfect beach day", "The week ahead, sunrise and sunset, and the best low tide for "
+                                           "tide pools."),
+            ("Every NOAA tide station", "Browse by state, or search by beach name, city, or ZIP code."),
+            ("Favorites", "A one-time unlock to keep your beaches close, shared with Family Sharing."),
+            ("Morning tide reports", "Wake up to a notification with each favorite beach's highs and lows."),
         ],
         "privacy": [
             ("The short version", [
-                "Beach Time doesn't have accounts, and it contains no analytics, ads, or tracking.",
+                "Beach Time doesn't have accounts, and it contains no analytics, ads, or tracking. Nothing "
+                "about you is collected or stored off your device.",
+            ]),
+            ("Tide data", [
+                "Tide predictions are downloaded directly from NOAA's public tide service. The app only asks "
+                "for the tide station you're viewing; nothing about you is sent. Like any website, NOAA's "
+                "servers can see your IP address.",
             ]),
             ("Location", [
-                "If you allow it, your approximate location is used to find nearby tide stations. The "
-                "coordinates are sent to the tide data service only to look up stations and are not tied to "
-                "you or stored by the app. You can turn location off at any time in Settings.",
+                "If you allow it, your location is used to find the tide stations closest to you. The list of "
+                "stations is built into the app, so that match happens entirely on your device and your "
+                "location is never sent anywhere. You can turn location off at any time in Settings.",
+            ]),
+            ("Search and maps", [
+                "When you search by city or ZIP code, that search text is sent to Apple's MapKit service to "
+                "find the place, and station maps are shown with Apple Maps. Both are covered by Apple's "
+                "privacy policy.",
+            ]),
+            ("Tide reports", [
+                "Morning tide reports are local notifications scheduled on your device. The app refreshes tide "
+                "data in the background so each report is current. No push notification service or server is "
+                "involved, and no device token is collected.",
             ]),
             ("Purchases", [
-                "Optional in-app purchases are handled entirely by Apple. We never receive your payment "
+                "The Favorites unlock is handled entirely by Apple. We never receive your payment "
                 "information.",
             ]),
             ("Data stored on your device", [
-                "Your favorite stations are saved on your device. Deleting the app removes them.",
+                "Your favorite beaches, tide report settings, and a cache of recent tide data are saved on "
+                "your device. Deleting the app removes them.",
             ]),
         ],
     },
@@ -317,7 +339,7 @@ def build_privacy(a: dict):
 <section class="prose policy">
   <p class="crumb"><a href="../index.html">{escape(a['name'])}</a></p>
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated {POLICY_DATE}</p>
+  <p class="muted">Last updated {a.get('policy_date', POLICY_DATE)}</p>
   {sections}
   <h2>Children</h2>
   <p>The app doesn't knowingly collect any information from anyone, including children under 13.</p>

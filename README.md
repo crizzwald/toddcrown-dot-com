@@ -15,6 +15,7 @@ git commit -am "Update site" && git push
 
 - Add an app: add an entry to `APPS`, put `icon.png` and `shot-1.jpg`… in `assets/img/apps/<slug>/`.
 - Contact email: set `CONTACT_EMAIL` (otherwise pages point to LinkedIn). An app can override it with `contact_email`.
+- Privacy page date: `POLICY_DATE`, or set `policy_date` on an app that changed its policy.
 - External privacy policy: set `privacy_url` on an app; links point there and no privacy page is generated.
 - Photo: add `assets/img/me.jpg` (square) and set `HAS_PHOTO = True`.
 
