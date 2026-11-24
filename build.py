@@ -188,28 +188,45 @@ APPS = [
     {
         "slug": "getup",
         "name": "GetUp Jump Higher",
+        "policy_date": "November 23, 2026",
         "subtitle": "Plyometrics for a higher vertical",
         "accent": "#3478F6",
         "store": "https://apps.apple.com/us/app/getup-jump-higher/id895973682",
-        "shots": 4,
-        "summary": "A plyometric program to build your vertical jump. Seven exercises build endurance first, "
-                   "then power, with videos for form and a schedule that keeps you on track.",
+        "shots": 6,
+        "summary": "Jump higher in 13 weeks. The GetUp plyometric program builds your endurance first, then your "
+                   "power, with every workout planned for you and a video for every exercise.",
         "features": [
-            ("Workout log", "Easily log progress through the program."),
-            ("Schedule", "Workout dates are calculated for you, and can be added to your calendar."),
-            ("Form videos", "Watch every exercise done correctly."),
+            ("Build the base, then the power", "An 8-week Endurance phase, then a 5-week Power phase."),
+            ("Every workout, on schedule", "Two workouts a week, every third day, dated for you and added to "
+                                           "your calendar if you like."),
+            ("Check off every rep", "Sets, reps and rest for each exercise, plus added weight and your "
+                                    "vertical."),
+            ("Learn the right form", "A video for all seven exercises, with the coaching cue for each."),
+            ("See how high you've gone", "Every phase you finish, with your best vertical jump."),
+            ("Unlock the full program", "The first three workouts of each phase are free. A one-time purchase "
+                                        "unlocks the rest, every exercise video, and the calendar."),
         ],
         "privacy": [
             ("The short version", [
-                "GetUp Jump Higher doesn't collect, store, or share any personal information. There are no "
-                "accounts, analytics, ads, or tracking.",
+                "GetUp Jump Higher doesn't have accounts, and it contains no analytics, ads, or tracking. "
+                "Nothing about you is collected or stored off your device.",
+            ]),
+            ("Exercise videos", [
+                "The form videos are hosted by Apple with the app and downloaded from Apple's servers the first "
+                "time you play each one. Nothing about you is sent with that download, and Apple handles it "
+                "under its own privacy policy.",
             ]),
             ("Calendar", [
-                "If you choose to add workouts to your calendar, the app asks for calendar access and only "
-                "creates those workout events. It does not read or upload your calendar.",
+                "If you choose to add workouts to your calendar, the app asks for calendar access and creates "
+                "its own GetUp Jump Higher calendar with your workout dates. It doesn't read or upload your "
+                "other events, and you can delete that calendar from the app's settings at any time.",
+            ]),
+            ("Purchases", [
+                "The unlock is handled entirely by Apple. We never receive your payment information.",
             ]),
             ("Data stored on your device", [
-                "Your workout progress is saved on your device. Deleting the app removes it.",
+                "Your phases, workout progress, weights, verticals, and notes are saved on your device, along "
+                "with any videos you've downloaded. Deleting the app removes them.",
             ]),
         ],
     },
