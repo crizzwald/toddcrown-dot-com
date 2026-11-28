@@ -95,39 +95,56 @@ APPS = [
     {
         "slug": "infinite-spartan-stats",
         "name": "Infinite Spartan Stats",
+        "policy_date": "November 27, 2026",
         "subtitle": "Halo Infinite multiplayer stats",
-        "accent": "#4FC3F7",
+        "accent": "#45AAF2",
         "store": "https://apps.apple.com/us/app/infinite-spartan-stats/id1638806689",
-        "shots": 4,
-        "summary": "Track your Halo Infinite multiplayer stats: rank and CSR by playlist, kill/death ratio, "
-                   "medals, custom games, and match history. Search for other Spartans and see theirs too.",
+        "shots": 6,
+        "summary": "Built for the competitive Halo Infinite player. Sign in with Xbox and get your Spartan, your "
+                   "ranks, and every match you've played, live from Halo Waypoint.",
         "features": [
-            ("Your stats", "CSR by playlist, core stats, K/D, and medals earned."),
-            ("Match history", "Recent matchmaking and custom games."),
-            ("Search Spartans", "Look up any gamertag and view their stats and matches."),
+            ("Your Spartan", "Career rank and XP, your last 20 results and streak, and a full service record: "
+                             "win rate, K/D, KDA, accuracy, damage, and more."),
+            ("Ranked", "Your CSR in every ranked playlist this season, with a trend for your recent ranked "
+                       "matches."),
+            ("Every mode, every stat", "Your totals in Capture the Flag, Oddball, Zones, Elimination, "
+                                       "Extraction, and more."),
+            ("Match history", "Every match with map, mode, K/D/A, and CSR won or lost. Filter by matchmade, "
+                              "custom, and local games."),
+            ("Match detail", "How you did against what Halo expected, your medals and damage, and both teams' "
+                             "full scoreboards with every player's rank."),
+            ("Loadout", "Your equipped armor on one gear sheet, from helmet and visor to coating, emblem, and "
+                        "effects."),
+            ("Medals", "Every medal you've earned, from mythic down, with counts."),
+            ("Search any Spartan", "Look up any gamertag or pick from your Xbox friends, and see their record, "
+                                   "ranks, loadout, and matches."),
         ],
         "note": "Infinite Spartan Stats is an unofficial app and is not affiliated with, endorsed by, or "
                 "sponsored by Microsoft, Xbox, or 343 Industries / Halo Studios. Halo is a trademark of "
                 "Microsoft Corporation.",
         "privacy": [
             ("The short version", [
-                "Infinite Spartan Stats has no servers of its own that store your data, and it contains no "
-                "analytics, ads, or tracking.",
+                "Infinite Spartan Stats has no servers of its own, and it contains no analytics, ads, or "
+                "tracking. Nothing about you is collected or stored off your device.",
             ]),
             ("Signing in with Xbox", [
                 "You sign in through Microsoft's own sign-in page. The app never sees your password. "
-                "Microsoft returns access tokens, which are stored on your device and used only to request "
-                "your Halo Infinite data from Microsoft, Xbox Live, and Halo Waypoint services.",
+                "Microsoft returns sign-in tokens, which are stored in your device's keychain and used only to "
+                "request Halo Infinite and Xbox data from Microsoft, Xbox Live, and Halo Waypoint services.",
                 "Your use of those services is covered by the Microsoft Privacy Statement.",
             ]),
-            ("Stats and clips", [
-                "Stats are requested directly from Halo Waypoint services. To show game clips, the gamertag "
-                "you're viewing is sent to a small proxy that retrieves them from a third-party Halo stats "
-                "service (HaloDotAPI). Gamertags and stats are public game information.",
+            ("Stats and Xbox friends", [
+                "Stats, matches, ranks, and loadouts are requested directly from Halo Waypoint. Nothing goes "
+                "through any other server.",
+                "When you search, the app asks Xbox Live for matching gamertags and for your Xbox friends list, "
+                "so you can pick a friend to look up. The friends list is only shown in the app; it isn't "
+                "saved or sent anywhere else. Gamertags and Halo stats are public game information.",
             ]),
             ("Data stored on your device", [
-                "Sign-in tokens and your recent searches are stored on your device. Signing out, turning on the "
-                "reset option in the app's section of the iOS Settings app, or deleting the app removes them.",
+                "Your sign-in, the Spartans you've recently looked up, and saved matches, maps, and pictures "
+                "are kept on your device so the app opens quickly. Clear Saved Data in the app's settings "
+                "removes the saved matches and pictures, signing out removes your sign-in, and deleting the "
+                "app removes everything.",
             ]),
         ],
     },
