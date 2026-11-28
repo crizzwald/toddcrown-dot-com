@@ -56,8 +56,7 @@ APPS = [
         "name": "Topside",
         "subtitle": "ARC Raiders map conditions & alerts",
         "accent": "#F1AA1C",
-        "store": "",  # fill in once the App Store listing is live
-        "status": "Coming soon",
+        "store": "https://apps.apple.com/us/app/arc-raiders-topside/id6836196364",
         "shots": 4,
         "summary": "Know what's live before you drop. Live map conditions for every region, countdowns to "
                    "what's next, and alerts the moment Night Raid hits.",
